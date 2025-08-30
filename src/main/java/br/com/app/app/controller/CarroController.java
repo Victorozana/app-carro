@@ -2,6 +2,7 @@ package br.com.app.app.controller;
 
 import br.com.app.app.entity.Carro;
 import br.com.app.app.service.CarroService;
+import org.hibernate.engine.spi.ManagedEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/carro")
+@RequestMapping("/api/carros")
 public class CarroController {
 
     @Autowired
@@ -27,7 +28,7 @@ public class CarroController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<String> update(@RequestBody Carro carro, @RequestParam Long id){
+    public ResponseEntity<String> update(@RequestBody Carro carro, @PathVariable Long id){
         try {
            String message = this.carroService.update(carro, id);
            return new ResponseEntity<>(message, HttpStatus.OK);
@@ -36,7 +37,7 @@ public class CarroController {
         }
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id){
         try {
             String message = this.carroService.delete(id);
