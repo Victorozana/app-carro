@@ -1,5 +1,6 @@
 package br.com.app.app.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,6 +22,7 @@ public class Marca {
     private String name;
     private String cnpj;
 
-    @OneToMany(mappedBy = "marca")
+    @OneToMany(mappedBy = "marca", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Carro> carros;
 }

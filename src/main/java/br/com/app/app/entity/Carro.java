@@ -1,5 +1,6 @@
 package br.com.app.app.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,9 +23,10 @@ public class Carro {
     private int year;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @JsonBackReference
     private Marca marca;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "carro_proprietario")
     private List<Proprietario> proprietarios;
 }

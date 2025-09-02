@@ -67,4 +67,33 @@ public class CarroController {
         }
     }
 
+    @GetMapping("/findByName")
+    public ResponseEntity<List<Carro>> findByName(@RequestParam String name){
+        try {
+            List<Carro> carros = this.carroService.findByName(name);
+            return new ResponseEntity<>(carros, HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/findByMarca")
+    public ResponseEntity<List<Carro>> findByMarca(@RequestParam Long idMarca){
+        try {
+            List<Carro> carros = this.carroService.findByMarca(idMarca);
+            return new ResponseEntity<>(carros, HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/findAcimaAno")
+    public ResponseEntity<List<Carro>> findAcimaAno(@RequestParam int year){
+        try {
+            List<Carro> carros = this.carroService.findAcimaAno(year);
+            return new ResponseEntity<>(carros, HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
 }
